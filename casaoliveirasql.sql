@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `casaoliveiradb`.`CLIENTE` (
   `etnia_cliente` VARCHAR(30) NOT NULL,
   `nome_social_cliente` VARCHAR(60) NULL,
   `estado_civil_cliente` VARCHAR(30) NOT NULL,
-  `data_cadastro_cliente` DATE NULL DEFAULT current timestamp(),
+  `data_cadastro_cliente` DATE NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`codigo_cliente`))
 ENGINE = InnoDB;
 
