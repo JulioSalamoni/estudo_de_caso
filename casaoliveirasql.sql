@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema casaoliveiradb
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema casaoliveiradb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `casaoliveiradb` DEFAULT CHARACTER SET utf8 ;
+USE `casaoliveiradb` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`CLIENTE`
+-- Table `casaoliveiradb`.`CLIENTE`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`CLIENTE` (
+CREATE TABLE IF NOT EXISTS `casaoliveiradb`.`CLIENTE` (
   `codigo_cliente` INT NOT NULL AUTO_INCREMENT,
   `nome_cliente` VARCHAR(60) NOT NULL,
   `cpf_cliente` VARCHAR(11) NOT NULL,
@@ -40,9 +40,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`FUNCIONARIO`
+-- Table `casaoliveiradb`.`FUNCIONARIO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`FUNCIONARIO` (
+CREATE TABLE IF NOT EXISTS `casaoliveiradb`.`FUNCIONARIO` (
   `codigo_funcionario` INT NOT NULL AUTO_INCREMENT,
   `nome_funcionario` VARCHAR(60) NOT NULL,
   `cpf_funcionario` VARCHAR(11) NOT NULL,
@@ -72,9 +72,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`PRODUTO`
+-- Table `casaoliveiradb`.`PRODUTO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`PRODUTO` (
+CREATE TABLE IF NOT EXISTS `casaoliveiradb`.`PRODUTO` (
   `codigo_produto` INT NOT NULL AUTO_INCREMENT,
   `nome_produto` VARCHAR(30) NOT NULL,
   `categoria` VARCHAR(30) NOT NULL,
@@ -87,9 +87,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`ESTOQUE`
+-- Table `casaoliveiradb`.`ESTOQUE`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`ESTOQUE` (
+CREATE TABLE IF NOT EXISTS `casaoliveiradb`.`ESTOQUE` (
   `codigo_estoque` INT NOT NULL AUTO_INCREMENT,
   `codigo_produto` INT NOT NULL,
   `fabricacao` DATE NOT NULL,
@@ -99,16 +99,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`ESTOQUE` (
   INDEX `fk_ESTOQUE_PRODUTO_idx` (`codigo_produto` ASC) VISIBLE,
   CONSTRAINT `fk_ESTOQUE_PRODUTO`
     FOREIGN KEY (`codigo_produto`)
-    REFERENCES `mydb`.`PRODUTO` (`codigo_produto`)
+    REFERENCES `casaoliveiradb`.`PRODUTO` (`codigo_produto`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`VENDA`
+-- Table `casaoliveiradb`.`VENDA`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`VENDA` (
+CREATE TABLE IF NOT EXISTS `casaoliveiradb`.`VENDA` (
   `codigo_venda` INT NOT NULL AUTO_INCREMENT,
   `codigo_cliente` INT NOT NULL,
   `codigo_funcionario` INT NOT NULL,
@@ -119,21 +119,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`VENDA` (
   INDEX `fk_VENDA_FUNCIONARIO1_idx` (`codigo_funcionario` ASC) VISIBLE,
   CONSTRAINT `fk_VENDA_CLIENTE1`
     FOREIGN KEY (`codigo_cliente`)
-    REFERENCES `mydb`.`CLIENTE` (`codigo_cliente`)
+    REFERENCES `casaoliveiradb`.`CLIENTE` (`codigo_cliente`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_VENDA_FUNCIONARIO1`
     FOREIGN KEY (`codigo_funcionario`)
-    REFERENCES `mydb`.`FUNCIONARIO` (`codigo_funcionario`)
+    REFERENCES `casaoliveiradb`.`FUNCIONARIO` (`codigo_funcionario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`ITENS_VENDA`
+-- Table `casaoliveiradb`.`ITENS_VENDA`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`ITENS_VENDA` (
+CREATE TABLE IF NOT EXISTS `casaoliveiradb`.`ITENS_VENDA` (
   `codigo_itens_venda` INT NOT NULL AUTO_INCREMENT,
   `codigo_venda` INT NOT NULL,
   `PRODUTO_codigo_produto` INT NOT NULL,
@@ -145,21 +145,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`ITENS_VENDA` (
   INDEX `fk_ITENS_VENDA_PRODUTO1_idx` (`PRODUTO_codigo_produto` ASC) VISIBLE,
   CONSTRAINT `fk_ITENS_VENDA_VENDA1`
     FOREIGN KEY (`codigo_venda`)
-    REFERENCES `mydb`.`VENDA` (`codigo_venda`)
+    REFERENCES `casaoliveiradb`.`VENDA` (`codigo_venda`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_ITENS_VENDA_PRODUTO1`
     FOREIGN KEY (`PRODUTO_codigo_produto`)
-    REFERENCES `mydb`.`PRODUTO` (`codigo_produto`)
+    REFERENCES `casaoliveiradb`.`PRODUTO` (`codigo_produto`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`PAGAMENTO`
+-- Table `casaoliveiradb`.`PAGAMENTO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`PAGAMENTO` (
+CREATE TABLE IF NOT EXISTS `casaoliveiradb`.`PAGAMENTO` (
   `codigo_pagamento` INT NOT NULL AUTO_INCREMENT,
   `codigo_venda` INT NOT NULL,
   `forma_pagamento` VARCHAR(20) NOT NULL,
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`PAGAMENTO` (
   INDEX `fk_PAGAMENTO_VENDA1_idx` (`codigo_venda` ASC) VISIBLE,
   CONSTRAINT `fk_PAGAMENTO_VENDA1`
     FOREIGN KEY (`codigo_venda`)
-    REFERENCES `mydb`.`VENDA` (`codigo_venda`)
+    REFERENCES `casaoliveiradb`.`VENDA` (`codigo_venda`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
